@@ -1,0 +1,114 @@
+<template>
+  <MSTable @register="tableRegister">
+    <template #toolbar>
+      <ms-button
+        @click="handleAdd"
+        icon="Plus"
+        type="primary"
+        auth="{{path}}/saveOrUpdate"
+      >
+      {{getI18nValue('btn.add')}}
+      </ms-button>
+    </template>
+  </MSTable>
+   <MSDialog @register="dialogRegister" @ok="handleConfirm" :title="title">
+     <div class="flex">
+      <MSForm @register="formRegister" class="flex-1"> </MSForm>
+      <div class="w-[12%]"></div>
+    </div>
+  </MSDialog>
+</template>
+<script setup lang="ts">
+import { useTable, MSTable } from '@/components/ms-table'
+import { useForm, MSForm } from '@/components/ms-form'
+import { useDialog, MSDialog } from '@/components/ms-dialog'
+import { get{{name}}PageList, {{path}}Save, {{path}}Del } from '@/apis/xxx/{{path}}'
+import { tableColumns, formColumns, searchColumns } from './index'
+import { getI18nValue } from '@/utils/i18n/index'
+const message = new useMessage()
+const messageBox = new useMessageBox()
+const title = ref<string>('')
+const { register:tableRegister, methods:tableMethods } = useTable({
+  cacheName: '',
+  tableColumns: tableColumns,
+  api: get{{name}}PageList,
+  showPagination: true,
+  isAutoHeight: true,
+  searchColumns: searchColumns,
+  actionColumn: [
+    {
+      icon: 'Edit',
+      onClick: handleEdit,
+      link: true,
+      auth: '{{path}}/saveOrUpdate',
+      tooltip: getI18nValue('btn.edit')
+    },
+    {
+      icon: 'Delete',
+      onClick: handleDelete,
+      link: true,
+      auth: '{{path}}/removeById',
+      tooltip: getI18nValue('btn.del')
+    }
+  ]
+})
+
+const { register: formRegister, methods: formMethods } = useForm({
+  formColumns,
+  labelWidth: '15%'
+})
+const { register: dialogRegister, methods: dialogMethods } = useDialog({})
+
+/** 新增*/
+function handleAdd() {
+  dialogMethods.setIsVisible(true)
+  title.value = getI18nValue('btn.add') + getI18nValue('xxx')
+}
+
+/**修改 */
+ function handleEdit(row: any) {
+ dialogMethods.setIsVisible(true)
+  title.value = getI18nValue('btn.edit') + getI18nValue('xxx')
+  formMethods.setValue(row)
+}
+
+/** 删除*/
+function handleDelete(row: any) {
+  messageBox.MessageBox({
+    message: getI18nValue('msg.deleteConfirm'),
+    beforeClose: async (action, instance, done) => {
+      if (action == 'confirm') {
+          try {
+            instance.confirmButtonLoading = true
+            await {{path}}Del(row.id).send()
+            await tableMethods.load()
+            done()
+            message.success({
+              message: getI18nValue('msg.deleteSuccess')
+            })
+          } finally {
+            instance.confirmButtonLoading = false
+          }
+      } else {
+        done()
+      }
+    }
+  })
+}
+
+/**保存 */
+const handleConfirm=async () => {
+  try {
+    await formMethods.validate()
+    dialogMethods.setConfirmLoading(true)
+    const data = await formMethods.getValue()
+    await {{path}}Save(data).send()
+    tableMethods.load()
+    dialogMethods.setIsVisible(false)
+  } finally {
+    dialogMethods.setConfirmLoading(false)
+  }
+}
+</script>
+<style lang="scss" scoped></style>
+ 

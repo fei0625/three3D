@@ -1,0 +1,28 @@
+.header {
+  @apply flex items-center  pr-5 text-white;
+  height: 50px;
+  background: var(--ms-header-bg);
+  border-bottom: 1px solid var(--ms-border-color);
+  &-logo {
+    color: #fff;
+    width: 240px;
+    @apply pl-5;
+  }
+
+  &-main {
+    @apply flex-1 flex items-center pl-9;
+    &-nav {
+      @apply mx-4 flex items-center;
+    }
+    &-avatar {
+      @apply flex ml-auto;
+      color: var(--ms-header-color);
+
+      .i18n {
+        :deep(.header-text) {
+          color: var(--ms-header-color);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.ms-table {
+  &-header {
+    padding: 18px;
+    background: var(--ms-bg);
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+  &-search {
+    padding: 18px 18px 0;
+    background: var(--ms-bg);
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+  &-content {
+    padding: 18px;
+    background: var(--ms-bg);
+    border-radius: 8px;
+    &-toolbar {
+      margin-bottom: 10px;
+    }
+  }
+}

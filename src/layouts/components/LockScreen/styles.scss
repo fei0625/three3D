@@ -1,0 +1,55 @@
+.lockScreen {
+  @apply fixed inset-0 flex bg-black text-white overflow-hidden;
+  z-index: 101;
+
+  &-unLock {
+    @apply absolute top-5 left-1/2 -translate-x-1/2 text-3xl cursor-pointer;
+    z-index: 100;
+  }
+
+  &.onLockLogin {
+    @apply bg-[#34373c];
+    -webkit-backdrop-filter-backdrop-filter: blur(7px); //兼容火狐、Safari
+  }
+
+  .login {
+    @apply absolute left-1/2 flex flex-col justify-center items-center;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+
+    &-user {
+      @apply p-2 rounded-md bg-[#ccc];
+    }
+
+    &-btn {
+      @apply flex justify-around w-full mt-1;
+      > div {
+        @apply cursor-pointer;
+      }
+    }
+
+    > * {
+      margin-bottom: 14px;
+    }
+
+    .username {
+      font-size: 30px;
+    }
+  }
+
+  .local-time {
+    position: absolute;
+    bottom: 60px;
+    left: 60px;
+    font-family: helvetica;
+
+    .time {
+      font-size: 70px;
+    }
+
+    .date {
+      font-size: 40px;
+    }
+  }
+}

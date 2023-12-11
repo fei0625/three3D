@@ -1,0 +1,28 @@
+.ms-container {
+  @apply overflow-hidden w-screen;
+  &-box {
+    @apply flex;
+    height: calc(100% - 50px);
+    &-content {
+      @apply flex-1 overflow-hidden;
+      &-nav {
+        @apply flex items-center;
+        height: 30px;
+      }
+      &-box {
+        @apply box-border  overflow-hidden flex flex-col;
+        background: var(--ms-main);
+        & > section {
+          @apply flex-1  overflow-x-hidden;
+          padding: 10px 15px;
+        }
+      }
+      &-footer {
+        background: var(--ms-bg);
+        border-top: 1px solid var(--ms-border-color);
+        padding: 5px;
+        text-align: center;
+      }
+    }
+  }
+}

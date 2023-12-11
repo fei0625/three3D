@@ -1,0 +1,37 @@
+@use './common.scss' as *;
+
+$--colors: (
+  'primary': (
+    'base': #015cff
+  ),
+  'success': (
+    'base': green
+  ),
+  'warning': (
+    'base': #ff9900
+  ),
+  'danger': (
+    'base': #fe0000
+  ),
+  'info': (
+    'base': #909399
+  )
+);
+$--border-radius: (
+  (
+    'base': 0px,
+    'small': 0px,
+    'round': 20px,
+    'circle': 100%
+  )
+);
+$--font-size: (
+  (
+    'base': 12px
+  )
+);
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: $--colors,
+  // $border-radius: $--border-radius,
+  // $font-size: $--font-size
+);

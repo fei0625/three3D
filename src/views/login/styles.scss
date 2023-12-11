@@ -1,0 +1,70 @@
+.login-container {
+  @apply h-screen bg-[#eeeeee] bg-cover flex justify-center items-center  box-border;
+  min-height: 550px;
+  background-image: url('@/assets/login_bg.svg');
+  .login-box {
+    @apply bg-white/80 relative flex  flex-col relative;
+    width: 96.5%;
+    height: 94%;
+    padding: 0 50px;
+    border-radius: 10px;
+    .i18n {
+      position: absolute;
+      top: 13px;
+      right: 18px;
+      :deep(.header-text) {
+        color: black;
+      }
+    }
+    .content {
+      @apply flex  justify-around items-center flex-1 overflow-hidden;
+      .login-left {
+        @apply md:block hidden;
+        height: 100%;
+        margin-right: 10px;
+        .login-left-img {
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .login-form {
+        @apply flex-shrink-0;
+        width: 420px;
+        padding: 50px 40px 45px;
+        background-color: var(--el-bg-color);
+        border-radius: 10px;
+        box-shadow: rgb(0 0 0 / 10%) 0 2px 10px 2px;
+        .logo-text {
+          @apply m-0 text-center text-3xl font-bold whitespace-nowrap mb-9;
+          color: var(--ms-color);
+        }
+      }
+    }
+    .footer {
+      @apply text-center mt-5 pb-5;
+    }
+  }
+}
+html.dark {
+  /* login */
+  .login-container {
+    background-color: #191919;
+    .login-box {
+      background-color: rgb(0 0 0 / 80%);
+      .i18n {
+        :deep(.header-text) {
+          color: inherit;
+        }
+      }
+      .content {
+        .login-form {
+          box-shadow: rgb(255 255 255 / 12%) 0 2px 10px 2px;
+          .logo-text {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

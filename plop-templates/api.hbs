@@ -1,0 +1,12 @@
+
+import { postRequest } from '@/utils/alova/index'
+import { {{name}}Type ,{{name}}QueryType,{{name}}SaveType} from './type'
+
+/**获取{{name}}列表*/
+export const get{{name}}PageList = ({{path}}Query:Partial<{{name}}QueryType>) => postRequest<PagesType<{{name}}Type[]>>('/{{path}}/page',{{path}}Query)
+
+/**{{path}}保存*/
+export const {{path}}Save = ({{path}}Save:{{name}}SaveType) => postRequest('/{{path}}/saveOrUpdate',{{path}}Save)
+
+/**{{path}}删除*/
+export const {{path}}Del = (id:number) => postRequest('/{{path}}/removeById',id)
